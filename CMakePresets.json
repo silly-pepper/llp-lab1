@@ -1,0 +1,55 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "x64-linux-debug",
+      "displayName": "Debug",
+      "description": "Default Debug build",
+      "inherits": "linux-base",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-linux-sanitized-debug",
+      "displayName": "Sanitized Debug",
+      "description": "Debug build with undefined, address and leak sanitizers enabled",
+      "inherits": "x64-linux-debug",
+      "cacheVariables": {
+        "USE_SANITIZERS": "ON"
+      }
+    },
+    {
+      "name": "x64-linux-release",
+      "displayName": "Release",
+      "description": "Default Release build",
+      "inherits": "x64-linux-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x64-linux-rel-with-deb-info",
+      "displayName": "RelWithDebInfo",
+      "description": "Release with debug information",
+      "inherits": "x64-linux-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ]
+}
